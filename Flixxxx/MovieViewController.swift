@@ -22,7 +22,8 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.delegate = self
         tableView.estimatedRowHeight = 223
         tableView.rowHeight = UITableView.automaticDimension
-        
+       
+    
         
         // Do any additional setup after loading the view.
         //print("Hello")

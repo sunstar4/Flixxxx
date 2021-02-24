@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -65,7 +66,7 @@
                                             <outlet property="posterView" destination="Ho9-gy-ZiJ" id="Has-DY-4Rz"/>
                                             <outlet property="synopsisLabel" destination="aJn-h7-gEF" id="dSf-5O-12B"/>
                                             <outlet property="titleLabel" destination="8gl-M9-k3k" id="opJ-Qy-aji"/>
-                                            <segue destination="0mU-JF-yTP" kind="show" id="leP-zS-0F6"/>
+                                            <segue destination="0mU-JF-yTP" kind="show" identifier="SuperheroDetails" id="leP-zS-0F6"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -123,15 +124,15 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBI-es-zg1">
                                 <rect key="frame" x="170" y="454" width="244" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Galvji-Bold" family="Galvji" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
                                 <color key="textColor" red="0.59115749597549438" green="0.61987197399139404" blue="0.91413038969039917" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umM-BU-bSd">
                                 <rect key="frame" x="0.0" y="540" width="414" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.45138680930000002" green="0.99309605359999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
+                                <color key="textColor" red="0.59115749597549438" green="0.61987197399139404" blue="0.91413038969039917" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Gl-Lr-VR0">
@@ -179,14 +180,61 @@
                     <view key="view" contentMode="scaleToFill" id="2ux-qf-3ZV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z8G-vo-U2I">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="VL3-EJ-pyg">
+                                    <size key="itemSize" width="202" height="310"/>
+                                    <size key="estimatedItemSize" width="202" height="310"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieGridCell" id="e69-5g-GBd" customClass="MovieGridCell" customModule="Flixxxx" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="202" height="310"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SXP-he-Rmu">
+                                            <rect key="frame" x="0.0" y="0.0" width="202" height="310"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZFV-RT-Qw8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="202" height="305"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="ZFV-RT-Qw8" secondAttribute="bottom" constant="5" id="8WM-RE-mXt"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZFV-RT-Qw8" secondAttribute="trailing" id="N00-AI-48v"/>
+                                                <constraint firstItem="ZFV-RT-Qw8" firstAttribute="top" secondItem="SXP-he-Rmu" secondAttribute="top" id="YxI-KJ-Jke"/>
+                                                <constraint firstItem="ZFV-RT-Qw8" firstAttribute="leading" secondItem="SXP-he-Rmu" secondAttribute="leading" id="vMF-Y6-7kR"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="202" height="310"/>
+                                        <connections>
+                                            <outlet property="posterView" destination="ZFV-RT-Qw8" id="Ay5-On-ckW"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="TPA-2A-xqh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Z8G-vo-U2I" firstAttribute="top" secondItem="2ux-qf-3ZV" secondAttribute="top" id="0gI-fo-wVu"/>
+                            <constraint firstItem="Z8G-vo-U2I" firstAttribute="leading" secondItem="2ux-qf-3ZV" secondAttribute="leading" id="Q17-4q-qnB"/>
+                            <constraint firstAttribute="bottom" secondItem="Z8G-vo-U2I" secondAttribute="bottom" id="Qgc-1Y-2Dc"/>
+                            <constraint firstAttribute="trailing" secondItem="Z8G-vo-U2I" secondAttribute="trailing" id="UiL-jN-CS7"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Superhero" id="0JV-Wc-tFY"/>
+                    <connections>
+                        <outlet property="collectionView" destination="Z8G-vo-U2I" id="ao4-3c-K8i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q4H-IE-a97" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2880" y="936"/>
+            <point key="canvasLocation" x="658" y="1323"/>
         </scene>
         <!--Superhero-->
         <scene sceneID="ZJZ-Gz-S1g">

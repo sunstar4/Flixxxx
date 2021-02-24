@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import AlamofireImage
 
-class MovieGridViewController: UIViewController {
+class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var movies = [[String: Any]]()
     
@@ -15,6 +18,17 @@ class MovieGridViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 5
+        let cellsPerLine: CGFloat = 2
+        let interItemSpacingTotal = layout.minimumInteritemSpacing * (cellsPerLine - 1)
+        let width = collectionView.frame.size.width / cellsPerLine - interItemSpacingTotal / cellsPerLine; layout.itemSize = CGSize(width: width, height: width * 3/2)
+        
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -28,6 +42,8 @@ class MovieGridViewController: UIViewController {
                     JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 
                 self.movies = dataDictionary["results"] as! [[String:Any]]
+                
+                self.collectionView.reloadData()
             
                //we don't have TableView here but a CollectionView. Next take all these movie @ self.movies and show on screen
                 print(self.movies)
@@ -36,6 +52,27 @@ class MovieGridViewController: UIViewController {
         }
         task.resume()
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movies.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
+        
+        let movie = movies[indexPath.item]
+        let baseUrl = "https://image.tmdb.org/t/p/w185"
+        let posterPath = movie["poster_path"] as! String
+        let posterUrl = URL(string: baseUrl + posterPath)
+        
+        // cell.posterView.af_setImage(withURL: posterUrl!)- deprecated
+        cell.posterView.af.setImage(withURL: posterUrl!)
+        
+        
+        
+        
+        return cell
     }
     
     
