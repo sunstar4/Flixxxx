@@ -9,21 +9,21 @@ import UIKit
 import AlamofireImage
 
 class MovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-   
-
+    
+    
     @IBOutlet weak var tableView: UITableView!
     
     var movies = [[String: Any]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 223
         tableView.rowHeight = UITableView.automaticDimension
-       
-    
+        
+        
         
         // Do any additional setup after loading the view.
         //print("Hello")
@@ -32,23 +32,23 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
-           // This will run when the network request returns
-           if let error = error {
-              print(error.localizedDescription)
-           } else if let data = data {
-            let dataDictionary = try!
-                JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-    
-            self.movies = dataDictionary["results"] as! [[String:Any]]
-            
-            self.tableView.reloadData()
-            
-          //  print(dataDictionary)
-              // TODO: Get the array of movies
-              // TODO: Store the movies in a property to use elsewhere
-              // TODO: Reload your table view data
-
-           }
+            // This will run when the network request returns
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let data = data {
+                let dataDictionary = try!
+                    JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                
+                self.movies = dataDictionary["results"] as! [[String:Any]]
+                
+                self.tableView.reloadData()
+                
+                //  print(dataDictionary)
+                // TODO: Get the array of movies
+                // TODO: Store the movies in a property to use elsewhere
+                // TODO: Reload your table view data
+                
+            }
         }
         task.resume()
         
@@ -62,7 +62,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         //instead of  let cell = UITableViewCell(), we change to tableView.dequeue........etc
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as!
-        MovieCell
+            MovieCell
         
         let movie = movies[indexPath.row]
         let title = movie["title"] as! String
@@ -86,7 +86,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination. Sender is the self the user tap on
@@ -105,8 +105,9 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         //to hide the highlighted movie the user tapped on
         tableView.deselectRow(at: indexPath, animated: true)
-    
+        
     }
-   
-
+    
+    
 }
+

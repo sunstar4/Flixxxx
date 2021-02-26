@@ -8,8 +8,9 @@ target 'Flixxxx' do
   # Pods for Flixxxx
   pod "AlamofireImage"
   pod "Alamofire"
-
-  target 'FlixxxxTests' do
+  pod "youtube-ios-player-helper", "~> x.y.z"
+  
+target 'FlixxxxTests' do
     inherit! :search_paths
     # Pods for testing
   end

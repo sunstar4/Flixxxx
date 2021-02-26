@@ -10,6 +10,7 @@ import AlamofireImage
 
 class MovieDetailsViewController: UIViewController {
     
+    
     @IBOutlet weak var backdropView: UIImageView!
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -36,22 +37,23 @@ class MovieDetailsViewController: UIViewController {
         // posterView.af_setImage(withURL: posterUrl!)- deprecated (the backdropView & posterView here only)
         posterView.af.setImage(withURL: posterUrl!)
         
-        let backdropPath = movie["backdrop_path"] as! String
-        let backdropUrl = URL(string: "https://image.tmdb.org/t/p/w780" + backdropPath)
+        if let backdropPath = movie["backdrop_path"] as? String  {
+            let backdropUrl = URL(string: "https://image.tmdb.org/t/p/w780" + backdropPath)
+            backdropView.af.setImage(withURL: backdropUrl!)
+        }
         
-        backdropView.af.setImage(withURL: backdropUrl!)
-    
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // Get the new view controller using segue.destination. Sender is the self the user tap on
+    // Pass the selected object to the new view controller.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("Loading up")
+        
+        // Pass the selected movie to the details view controller
+        
+        let trailerViewController = segue.destination as! TrailerViewController
+        trailerViewController.movie = movie
+    }
     
 }

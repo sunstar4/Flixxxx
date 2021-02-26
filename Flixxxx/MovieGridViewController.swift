@@ -8,6 +8,7 @@
 import UIKit
 import AlamofireImage
 
+
 class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -29,8 +30,9 @@ class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICol
         let interItemSpacingTotal = layout.minimumInteritemSpacing * (cellsPerLine - 1)
         let width = collectionView.frame.size.width / cellsPerLine - interItemSpacingTotal / cellsPerLine; layout.itemSize = CGSize(width: width, height: width * 3/2)
         
-        
+        //create URL
         let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
+        //create URL Request
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -44,8 +46,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICol
                 self.movies = dataDictionary["results"] as! [[String:Any]]
                 
                 self.collectionView.reloadData()
-            
-               //we don't have TableView here but a CollectionView. Next take all these movie @ self.movies and show on screen
+                
+                //we don't have TableView here but a CollectionView. Next take all these movie @ self.movies and show on screen
                 print(self.movies)
                 
             }
@@ -69,11 +71,45 @@ class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICol
         // cell.posterView.af_setImage(withURL: posterUrl!)- deprecated
         cell.posterView.af.setImage(withURL: posterUrl!)
         
-        
-        
-        
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //nagivate to trailer controller
+        //_ = TrailerViewController.self
+        
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination. Sender is the self the user tap on
+        // Pass the selected object to the new view controller.
+        
+        print("Loading up the details screen")
+        
+        // Find the selected movie
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPath(for: cell)!
+        let movie = movies[indexPath.item]
+        
+        // Pass the selected movie to the details view controller
+        let detailsViewController = segue.destination as! MovieDetailsViewController
+        detailsViewController.movie = movie
+        
+        
+    }
+    
+    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //   print("Loading Loading")
+    
+    // Find the selected movie
+    
+    
+    // Pass the selected movie to the details view controller
+    
+    
+    
+    // pass the selected movie for a trailer
     
     
     /*
@@ -85,5 +121,6 @@ class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICol
      // Pass the selected object to the new view controller.
      }
      */
+    
     
 }

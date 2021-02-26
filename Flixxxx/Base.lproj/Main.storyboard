@@ -66,7 +66,7 @@
                                             <outlet property="posterView" destination="Ho9-gy-ZiJ" id="Has-DY-4Rz"/>
                                             <outlet property="synopsisLabel" destination="aJn-h7-gEF" id="dSf-5O-12B"/>
                                             <outlet property="titleLabel" destination="8gl-M9-k3k" id="opJ-Qy-aji"/>
-                                            <segue destination="0mU-JF-yTP" kind="show" identifier="SuperheroDetails" id="leP-zS-0F6"/>
+                                            <segue destination="0mU-JF-yTP" kind="show" id="Az6-9E-Dnv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -88,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-113" y="648"/>
+            <point key="canvasLocation" x="-530" y="758"/>
         </scene>
         <!--Now Playing-->
         <scene sceneID="XJT-OR-ykv">
@@ -107,7 +107,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cb0-GF-OG2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-113.04347826086958" y="0.0"/>
+            <point key="canvasLocation" x="-529" y="-137"/>
         </scene>
         <!--Movie Details View Controller-->
         <scene sceneID="YvW-i2-y2L">
@@ -135,9 +135,13 @@
                                 <color key="textColor" red="0.59115749597549438" green="0.61987197399139404" blue="0.91413038969039917" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Gl-Lr-VR0">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Gl-Lr-VR0">
                                 <rect key="frame" x="0.0" y="304" width="162" height="211"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Sey-le-qtL" appends="YES" id="1e2-se-9zj"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TiL-yW-93J"/>
@@ -152,8 +156,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vY1-3J-9KO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Sey-le-qtL">
+                    <connections>
+                        <segue destination="XsS-4J-Z6h" kind="presentation" identifier="DetailsTrailerSegue" id="d0G-vD-8Of"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-113" y="1311"/>
+            <point key="canvasLocation" x="-113" y="1535"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="j0f-CC-2Ug">
@@ -212,6 +221,7 @@
                                         <size key="customSize" width="202" height="310"/>
                                         <connections>
                                             <outlet property="posterView" destination="ZFV-RT-Qw8" id="Ay5-On-ckW"/>
+                                            <segue destination="0mU-JF-yTP" kind="show" id="qcQ-1I-pTQ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -233,7 +243,32 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q4H-IE-a97" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="658" y="1323"/>
+            <point key="canvasLocation" x="1536" y="1404"/>
+        </scene>
+        <!--Trailer View Controller-->
+        <scene sceneID="Gjo-XL-O8q">
+            <objects>
+                <viewController storyboardIdentifier="Trailer_vc" id="XsS-4J-Z6h" customClass="TrailerViewController" customModule="Flixxxx" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OVs-dC-cJw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7v-Av-mCm">
+                                <rect key="frame" x="184" y="668" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="trailerButton:" destination="XsS-4J-Z6h" eventType="touchUpInside" id="ex6-iq-zdT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aUc-NQ-ePg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P6Y-XR-5cU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="645" y="1685"/>
         </scene>
         <!--Superhero-->
         <scene sceneID="ZJZ-Gz-S1g">
@@ -255,6 +290,9 @@
             <point key="canvasLocation" x="2879.7101449275365" y="99.776785714285708"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="qcQ-1I-pTQ"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="now_playing_tabbar_item" width="21" height="21"/>
         <image name="superhero_tabbar_item" width="21" height="23"/>
